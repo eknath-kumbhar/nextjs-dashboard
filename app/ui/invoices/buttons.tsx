@@ -1,4 +1,4 @@
-import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { EyeIcon, PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { deleteInvoice } from '@/app/lib/actions';
 
@@ -36,5 +36,23 @@ export function DeleteInvoice({ id }: { id: string }) {
         <TrashIcon className="w-5" />
       </button>
     </form>
+  );
+}
+
+export function ViewCustomerInvoice({ name, total_invoices, type = 'link' }: {
+  name: string, total_invoices?: number, type?: 'link' | 'button'
+}) {
+  if (type === 'link') {
+    return <Link href={`/dashboard/invoices?page=1&query=${name}`} className='text-blue-600 hover:text-blue-400' >View {total_invoices} invoices</Link>
+  }
+
+  return (
+    <Link
+      href={`/dashboard/invoices?page=1&query=${name}`}
+      className="flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+    >
+      <span className="hidden md:block">View Invoice</span>
+      <EyeIcon className="h-5 md:ml-4" />
+    </Link>
   );
 }

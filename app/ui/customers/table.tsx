@@ -2,9 +2,9 @@ import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
 import {
-  CustomersTableType,
   FormattedCustomersTable,
 } from '@/app/lib/definitions';
+import { ViewCustomerInvoice } from '../invoices/buttons';
 
 export default async function CustomersTable({
   customers,
@@ -57,7 +57,7 @@ export default async function CustomersTable({
                       </div>
                     </div>
                     <div className="pt-4 text-sm">
-                      <p>{customer.total_invoices} invoices</p>
+                      <ViewCustomerInvoice name={customer.name} total_invoices={customer.total_invoices} />
                     </div>
                   </div>
                 ))}
@@ -79,6 +79,8 @@ export default async function CustomersTable({
                     </th>
                     <th scope="col" className="px-4 py-5 font-medium">
                       Total Paid
+                    </th>
+                    <th scope="col" className="px-4 py-5 font-medium">
                     </th>
                   </tr>
                 </thead>
@@ -107,8 +109,13 @@ export default async function CustomersTable({
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                         {customer.total_pending}
                       </td>
-                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
+                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                         {customer.total_paid}
+                      </td>
+                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
+                        <div className="flex justify-end gap-3">
+                          <ViewCustomerInvoice name={customer.name} type='button' />
+                        </div>
                       </td>
                     </tr>
                   ))}
