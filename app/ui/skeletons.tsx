@@ -216,3 +216,25 @@ export function InvoicesTableSkeleton() {
     </div>
   );
 }
+
+function ProductCardSkeleton() {
+  return (
+    <div
+      className={`${shimmer} mt-6 relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}
+    >
+      <div className="h-40 w-full rounded-md bg-gray-200" />
+      <div className="mt-3 h-4 w-3/4 rounded-md bg-gray-200" />
+      <div className="mt-2 h-4 w-1/3 rounded-md bg-gray-200" />
+    </div>
+  );
+}
+
+export function ProductGridSkeleton() {
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {Array.from({ length: 10 }, (_, i) => (
+        <ProductCardSkeleton key={i} />
+      ))}
+    </div>
+  );
+}
